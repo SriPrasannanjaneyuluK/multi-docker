@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   client:
     image: 'bymywheels/multi-client'
@@ -17,16 +18,18 @@ services:
       - PGDATABASE=$PGDATABASE
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
-    worker:
-      image: 'bymywheels/multi-worker'
-      mem_limit: 128m
-      hostname: worker
-      environment:
-        - REDIS_HOST=$REDIS_HOST
-        - REDIS_PORT=$REDIS_PORT
-    nginx:
-      image: 'bymywheels/multi-nginx'
-      mem_limit: 128m
-      hostname: nginx
-      ports:
-        - '80:80'
+
+  worker:
+    image: 'bymywheels/multi-worker'
+    mem_limit: 128m
+    hostname: worker
+    environment:
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+
+  nginx:
+    image: 'bymywheels/multi-nginx'
+    mem_limit: 128m
+    hostname: nginx
+    ports:
+      - '80:80'
