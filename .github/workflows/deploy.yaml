@@ -14,12 +14,12 @@ jobs:
       - run: docker build -t bymywheels/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true bymywheels/react-test npm test
       
-      - run: docker build -t bymywheels/multi-client:v3 ./client
+      - run: docker build -t bymywheels/multi-client ./client
       - run: docker build -t bymywheels/multi-nginx ./nginx
       - run: docker build -t bymywheels/multi-server ./server
       - run: docker build -t bymywheels/multi-worker ./worker
 
-      - run: docker push bymywheels/multi-client:v3
+      - run: docker push bymywheels/multi-client
       - run: docker push bymywheels/multi-nginx
       - run: docker push bymywheels/multi-server
       - run: docker push bymywheels/multi-worker
