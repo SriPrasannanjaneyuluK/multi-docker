@@ -14,27 +14,45 @@ class Fib extends Component {
   }
 
   async fetchValues() {
-    const values = await axios.get('/api/values/current');
-    this.setState({ values: values.data });
+    try {
+      const { data } = await axios.get('/api/values/current');
+      this.setState({
+        values: data && typeof data === 'object' && !Array.isArray(data) ? data : {},
+      });
+    } catch {
+      this.setState({ values: {} });
+    }
   }
 
   async fetchIndexes() {
-    const seenIndexes = await axios.get('/api/values/all');
-    this.setState({
-      seenIndexes: seenIndexes.data,
-    });
+    try {
+      const { data } = await axios.get('/api/values/all');
+      this.setState({
+        seenIndexes: Array.isArray(data) ? data : [],
+      });
+    } catch {
+      this.setState({ seenIndexes: [] });
+    }
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.post('/api/values', {
-      index: this.state.index,
-    });
-    this.setState({ index: '' });
+    try {
+      await axios.post('/api/values', {
+        index: this.state.index,
+      });
+      this.setState({ index: '' });
+    } catch {
+      // API unavailable — keep form usable with current input cleared or kept
+    }
   };
 
   renderSeenIndexes() {
+    if (!this.state.seenIndexes.length) {
+      return 'None yet';
+    }
+
     return this.state.seenIndexes.map(({ number }) => number).join(', ');
   }
 
