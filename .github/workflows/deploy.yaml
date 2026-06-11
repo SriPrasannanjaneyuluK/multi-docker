@@ -19,7 +19,7 @@ jobs:
       - run: docker build -t bymywheels/multi-server ./server
       - run: docker build -t bymywheels/multi-worker ./worker
 
-      - run: docker push bymywheels/multi-client
+      - run: docker push bymywheels/multi-client:v2
       - run: docker push bymywheels/multi-nginx
       - run: docker push bymywheels/multi-server
       - run: docker push bymywheels/multi-worker
