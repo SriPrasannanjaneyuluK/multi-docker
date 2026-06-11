@@ -18,7 +18,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            New Version of the kubernetes deployment latest
+            New Version of the kubernetes deployment v5
           </a>
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
